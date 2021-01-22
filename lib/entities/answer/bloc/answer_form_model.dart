@@ -1,5 +1,4 @@
 import 'package:formz/formz.dart';
-import 'package:amcCarePlanner/entities/answer/answer_model.dart';
 
 enum AnswerValidationError { invalid }
 class AnswerInput extends FormzInput<String, AnswerValidationError> {

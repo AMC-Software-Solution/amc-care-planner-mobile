@@ -10,7 +10,6 @@ import 'package:formz/formz.dart';
 
 import 'bloc/login_models.dart';
 
-
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key key}) : super(key: AmcCarePlannerKeys.mainScreen);
 
@@ -18,14 +17,14 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if(state.status.isSubmissionSuccess){
+        if (state.status.isSubmissionSuccess) {
           Navigator.pushNamed(context, AmcCarePlannerRoutes.main);
         }
       },
       child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title:Text(S.of(context).pageLoginTitle),
+            title: Text(S.of(context).pageLoginTitle),
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(15.0),
@@ -33,9 +32,10 @@ class LoginScreen extends StatelessWidget {
               header(context),
               loginForm(),
               Padding(
-                padding: EdgeInsets.only(bottom: 50),
+                padding: EdgeInsets.only(bottom: 80),
               ),
-              register(context)
+              submit(),
+              // register(context)
             ]),
           )),
     );
@@ -44,10 +44,17 @@ class LoginScreen extends StatelessWidget {
   Widget header(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image(image: AssetImage('assets/images/jhipster_family_member_2_head-512.png'),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+        ),
+        Image(
+          image: AssetImage('assets/images/amc_logo.png'),
           fit: BoxFit.fill,
-          width: MediaQuery.of(context).size.width * 0.4,),
-        Padding(padding: EdgeInsets.symmetric(vertical: 20))
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+        ),
       ],
     );
   }
@@ -58,62 +65,78 @@ class LoginScreen extends StatelessWidget {
         builder: (context, state) {
           return TextFormField(
               initialValue: state.login.value,
-              onChanged: (value) { context.bloc<LoginBloc>().add(LoginChanged(login: value)); },
+              onChanged: (value) {
+                context.bloc<LoginBloc>().add(LoginChanged(login: value));
+              },
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                  labelText:S.of(context).pageRegisterFormLogin,
-                  errorText: state.login.invalid ? LoginValidationError.invalid.invalidMessage : null));
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  labelText: S.of(context).pageLoginBar,
+                  errorText: state.login.invalid
+                      ? LoginValidationError.invalid.invalidMessage
+                      : null));
         });
   }
 
   Widget passwordField() {
     return BlocBuilder<LoginBloc, LoginState>(
-        buildWhen:(previous, current) => previous.password != current.password,
+        buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
           return TextFormField(
               initialValue: state.password.value,
-              onChanged: (value) { context.bloc<LoginBloc>().add(PasswordChanged(password: value)); },
+              onChanged: (value) {
+                context.bloc<LoginBloc>().add(PasswordChanged(password: value));
+              },
               obscureText: true,
               decoration: InputDecoration(
-                  labelText:S.of(context).pageRegisterFormPassword,
-                  errorText: state.password.invalid ? PasswordValidationError.invalid.invalidMessage : null));
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  labelText: S.of(context).pageRegisterFormPassword,
+                  errorText: state.password.invalid
+                      ? PasswordValidationError.invalid.invalidMessage
+                      : null));
         });
   }
 
   Widget loginForm() {
     return Form(
-          child: Wrap(runSpacing: 15, children: <Widget>[
-            loginField(),
-            passwordField(),
-            validationZone(),
-            submit()
-          ]),
-        );
-  }
-
-  Widget register(BuildContext context) {
-    return RaisedButton(
-      color: Colors.red,
-      child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: 50,
-          child: Center(
-            child: Text(S.of(context).pageRegisterTitle.toUpperCase()            ),
-          )),
-      onPressed: () => Navigator.pushNamed(context, AmcCarePlannerRoutes.register),
+      child: Wrap(runSpacing: 15, children: <Widget>[
+        loginField(),
+        passwordField(),
+        validationZone(),
+      ]),
     );
   }
 
+  // Widget register(BuildContext context) {
+  //   return RaisedButton(
+  //     color: Colors.red,
+  //     child: Container(
+  //         width: MediaQuery.of(context).size.width,
+  //         height: 50,
+  //         child: Center(
+  //           child: Text(S.of(context).pageRegisterTitle.toUpperCase()),
+  //         )),
+  //     onPressed: () =>
+  //         Navigator.pushNamed(context, AmcCarePlannerRoutes.register),
+  //   );
+  // }
+
   Widget validationZone() {
     return BlocBuilder<LoginBloc, LoginState>(
-        buildWhen:(previous, current) => previous.status != current.status,
+        buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
           return Visibility(
               visible: state.status.isSubmissionFailure,
               child: Center(
                 child: Text(
                   generateError(state, context),
-                  style: TextStyle(fontSize: Theme.of(context).textTheme.bodyText1.fontSize, color: Theme.of(context).errorColor),
+                  style: TextStyle(
+                      fontSize: Theme.of(context).textTheme.bodyText1.fontSize,
+                      color: Theme.of(context).errorColor),
                   textAlign: TextAlign.center,
                 ),
               ));
@@ -129,25 +152,32 @@ class LoginScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 child: Center(
-                        child: Visibility(
-                          replacement: CircularProgressIndicator(value: null),
-                          visible: !state.status.isSubmissionInProgress,
-                    child: Text(S.of(context).pageLoginLoginButton.toUpperCase()),
-                        ),
-                      )
-                    ),
+                  child: Visibility(
+                    replacement: CircularProgressIndicator(value: null),
+                    visible: !state.status.isSubmissionInProgress,
+                    child:
+                        Text(S.of(context).pageLoginLoginButton.toUpperCase()),
+                  ),
+                )),
             onPressed: state.status.isValidated
-                ? () => context.bloc<LoginBloc>().add(FormSubmitted()) : null,
+                ? () => context.bloc<LoginBloc>().add(FormSubmitted())
+                : null,
           );
         });
   }
 
   String generateError(LoginState state, BuildContext context) {
     String errorTranslated = '';
-    if (state.generalErrorKey.toString().compareTo(LoginState.authenticationFailKey) == 0) {
-                        errorTranslated =S.of(context).pageLoginErrorAuthentication;
-    } else if (state.generalErrorKey.toString().compareTo(HttpUtils.errorServerKey) == 0) {
-      errorTranslated =S.of(context).genericErrorServer;
+    if (state.generalErrorKey
+            .toString()
+            .compareTo(LoginState.authenticationFailKey) ==
+        0) {
+      errorTranslated = S.of(context).pageLoginErrorAuthentication;
+    } else if (state.generalErrorKey
+            .toString()
+            .compareTo(HttpUtils.errorServerKey) ==
+        0) {
+      errorTranslated = S.of(context).genericErrorServer;
     }
     return errorTranslated;
   }

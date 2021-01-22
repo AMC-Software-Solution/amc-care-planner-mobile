@@ -6,7 +6,6 @@ import 'package:amcCarePlanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:amcCarePlanner/shared/repository/http_utils.dart';
-import 'package:amcCarePlanner/entities/access/access_model.dart';
 import 'access_route.dart';
 
 class AccessUpdateScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:formz/formz.dart';
-import 'package:amcCarePlanner/entities/branch/branch_model.dart';
 
 enum NameValidationError { invalid }
 class NameInput extends FormzInput<String, NameValidationError> {

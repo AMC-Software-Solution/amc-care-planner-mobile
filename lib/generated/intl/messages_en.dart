@@ -19,7 +19,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(login) => "Current user : ${login}";
+  static m0(login) => "Hi! ${login}";
 
   static m1(min) => "Rules : 1 uppercase, 1 number and ${min} characters";
 
@@ -740,19 +740,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "pageEntitiesTravelTravelStatusField" : MessageLookupByLibrary.simpleMessage("TravelStatus"),
     "pageEntitiesTravelUpdateTitle" : MessageLookupByLibrary.simpleMessage("Edit Travels"),
     "pageEntitiesTravelViewTitle" : MessageLookupByLibrary.simpleMessage("Travels View"),
-    "pageLoginBar" : MessageLookupByLibrary.simpleMessage("Login"),
+    "pageLoginBar" : MessageLookupByLibrary.simpleMessage("Username:"),
     "pageLoginErrorAuthentication" : MessageLookupByLibrary.simpleMessage("Problem when authenticate, verify your credential"),
     "pageLoginLoginButton" : MessageLookupByLibrary.simpleMessage("Sign in"),
     "pageLoginRegisterButton" : MessageLookupByLibrary.simpleMessage("Register"),
-    "pageLoginTitle" : MessageLookupByLibrary.simpleMessage("Welcome to Jhipster flutter app"),
+    "pageLoginTitle" : MessageLookupByLibrary.simpleMessage("Care Planner App"),
     "pageMainCurrentUser" : m0,
     "pageMainEventButton" : MessageLookupByLibrary.simpleMessage("Event"),
     "pageMainMarketButton" : MessageLookupByLibrary.simpleMessage("Marketplace"),
     "pageMainNumberPackOpen" : MessageLookupByLibrary.simpleMessage("Packs"),
     "pageMainOpenPackButton" : MessageLookupByLibrary.simpleMessage("Open pack"),
     "pageMainProfileButton" : MessageLookupByLibrary.simpleMessage("Your profile"),
-    "pageMainTitle" : MessageLookupByLibrary.simpleMessage("Main page"),
-    "pageMainWelcome" : MessageLookupByLibrary.simpleMessage("Welcome to your Jhipster flutter app"),
+    "pageMainTitle" : MessageLookupByLibrary.simpleMessage("Home"),
+    "pageMainWelcome" : MessageLookupByLibrary.simpleMessage("Welcome to your CarePlannerApp"),
     "pageRegisterConfirmationPasswordValidationError" : m1,
     "pageRegisterErrorLoginExist" : MessageLookupByLibrary.simpleMessage("Login already taken"),
     "pageRegisterErrorMailExist" : MessageLookupByLibrary.simpleMessage("Email already exist"),
@@ -761,7 +761,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pageRegisterFormEmail" : MessageLookupByLibrary.simpleMessage("Email"),
     "pageRegisterFormEmailHint" : MessageLookupByLibrary.simpleMessage("you@example.com"),
     "pageRegisterFormLogin" : MessageLookupByLibrary.simpleMessage("Login"),
-    "pageRegisterFormPassword" : MessageLookupByLibrary.simpleMessage("Password"),
+    "pageRegisterFormPassword" : MessageLookupByLibrary.simpleMessage("Password:"),
     "pageRegisterFormSubmit" : MessageLookupByLibrary.simpleMessage("Sign up"),
     "pageRegisterFormTermsConditions" : MessageLookupByLibrary.simpleMessage("I accept the terms of use"),
     "pageRegisterFormTermsConditionsNotChecked" : MessageLookupByLibrary.simpleMessage("Please accept the terms and conditions"),

@@ -6,7 +6,6 @@ import 'package:amcCarePlanner/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:amcCarePlanner/shared/repository/http_utils.dart';
-import 'package:amcCarePlanner/entities/answer/answer_model.dart';
 import 'answer_route.dart';
 
 class AnswerUpdateScreen extends StatelessWidget {

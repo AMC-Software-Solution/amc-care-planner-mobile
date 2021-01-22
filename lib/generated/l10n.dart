@@ -45,20 +45,20 @@ class S {
     );
   }
 
-  /// `Login`
+  /// `Username:`
   String get pageLoginBar {
     return Intl.message(
-      'Login',
+      'Username:',
       name: 'pageLoginBar',
       desc: '',
       args: [],
     );
   }
 
-  /// `Welcome to Jhipster flutter app`
+  /// `Care Planner App`
   String get pageLoginTitle {
     return Intl.message(
-      'Welcome to Jhipster flutter app',
+      'Care Planner App',
       name: 'pageLoginTitle',
       desc: '',
       args: [],
@@ -135,10 +135,10 @@ class S {
     );
   }
 
-  /// `Password`
+  /// `Password:`
   String get pageRegisterFormPassword {
     return Intl.message(
-      'Password',
+      'Password:',
       name: 'pageRegisterFormPassword',
       desc: '',
       args: [],
@@ -335,30 +335,30 @@ class S {
     );
   }
 
-  /// `Main page`
+  /// `Home`
   String get pageMainTitle {
     return Intl.message(
-      'Main page',
+      'Home',
       name: 'pageMainTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Current user : {login}`
+  /// `Hi! {login}`
   String pageMainCurrentUser(Object login) {
     return Intl.message(
-      'Current user : $login',
+      'Hi! $login',
       name: 'pageMainCurrentUser',
       desc: '',
       args: [login],
     );
   }
 
-  /// `Welcome to your Jhipster flutter app`
+  /// `Welcome to your CarePlannerApp`
   String get pageMainWelcome {
     return Intl.message(
-      'Welcome to your Jhipster flutter app',
+      'Welcome to your CarePlannerApp',
       name: 'pageMainWelcome',
       desc: '',
       args: [],
