@@ -22,38 +22,49 @@ class LoginScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(S.of(context).pageLoginTitle),
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(children: <Widget>[
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   title: Text(S.of(context).pageLoginTitle),
+        // ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Image(
+                  image: AssetImage(
+                    'assets/images/bg-atas.png',
+                  ),
+                  fit: BoxFit.fill,
+                ),
+              ),
               header(context),
               loginForm(),
-              Padding(
-                padding: EdgeInsets.only(bottom: 80),
+              Padding(padding: EdgeInsets.only(bottom: 30.0),),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Image(
+                  image: AssetImage(
+                    'assets/images/bg-bawah.png',
+                  ),
+                  fit: BoxFit.fill,
+                ),
               ),
-              submit(),
               // register(context)
-            ]),
-          )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   Widget header(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-        ),
         Image(
           image: AssetImage('assets/images/amc_logo.png'),
           fit: BoxFit.fill,
           width: MediaQuery.of(context).size.width * 0.4,
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
         ),
       ],
     );
@@ -63,20 +74,34 @@ class LoginScreen extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => previous.login != current.login,
         builder: (context, state) {
-          return TextFormField(
-              initialValue: state.login.value,
-              onChanged: (value) {
-                context.bloc<LoginBloc>().add(LoginChanged(login: value));
-              },
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+          return Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Column(
+              children: <Widget>[
+                Material(
+                  elevation: 15.0,
+                  shadowColor: Colors.black,
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: TextFormField(
+                    initialValue: state.login.value,
+                    onChanged: (value) {
+                      context.bloc<LoginBloc>().add(LoginChanged(login: value));
+                    },
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.person_outline, size: 35.0,),
+                        // border: UnderlineInputBorder(
+                        //   borderSide: BorderSide(color: Colors.black),
+                        // ),
+                        labelText: S.of(context).pageLoginBar,
+                        errorText: state.login.invalid
+                            ? LoginValidationError.invalid.invalidMessage
+                            : null),
                   ),
-                  labelText: S.of(context).pageLoginBar,
-                  errorText: state.login.invalid
-                      ? LoginValidationError.invalid.invalidMessage
-                      : null));
+                ),
+              ],
+            ),
+          );
         });
   }
 
@@ -84,20 +109,37 @@ class LoginScreen extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
-          return TextFormField(
-              initialValue: state.password.value,
-              onChanged: (value) {
-                context.bloc<LoginBloc>().add(PasswordChanged(password: value));
-              },
-              obscureText: true,
-              decoration: InputDecoration(
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
+          return Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Column(
+              children: <Widget>[
+                Material(
+                  elevation: 15.0,
+                  shadowColor: Colors.black,
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: TextFormField(
+                    initialValue: state.password.value,
+                    onChanged: (value) {
+                      context
+                          .bloc<LoginBloc>()
+                          .add(PasswordChanged(password: value));
+                    },
+                    keyboardType: TextInputType.text,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.lock_outline, size: 35.0),
+                        // border: UnderlineInputBorder(
+                        //   borderSide: BorderSide(color: Colors.black),
+                        // ),
+                        labelText: S.of(context).pageRegisterFormPassword,
+                        errorText: state.password.invalid
+                            ? PasswordValidationError.invalid.invalidMessage
+                            : null),
                   ),
-                  labelText: S.of(context).pageRegisterFormPassword,
-                  errorText: state.password.invalid
-                      ? PasswordValidationError.invalid.invalidMessage
-                      : null));
+                ),
+              ],
+            ),
+          );
         });
   }
 
@@ -107,6 +149,7 @@ class LoginScreen extends StatelessWidget {
         loginField(),
         passwordField(),
         validationZone(),
+        submit(),
       ]),
     );
   }
@@ -145,25 +188,43 @@ class LoginScreen extends StatelessWidget {
 
   Widget submit() {
     return BlocBuilder<LoginBloc, LoginState>(
-        buildWhen: (previous, current) => previous.status != current.status,
-        builder: (context, state) {
-          return RaisedButton(
-            child: Container(
-                width: MediaQuery.of(context).size.width,
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Material(
+              elevation: 10.0,
+              shadowColor: Colors.deepOrangeAccent,
+              borderRadius: BorderRadius.circular(30.0),
+              child: ButtonTheme(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                minWidth: MediaQuery.of(context).size.width / 2,
                 height: 50,
-                child: Center(
-                  child: Visibility(
-                    replacement: CircularProgressIndicator(value: null),
-                    visible: !state.status.isSubmissionInProgress,
-                    child:
-                        Text(S.of(context).pageLoginLoginButton.toUpperCase()),
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: RaisedButton(
+                    child: Center(
+                      child: Visibility(
+                        replacement: CircularProgressIndicator(value: null),
+                        visible: !state.status.isSubmissionInProgress,
+                        child: Text(
+                            S.of(context).pageLoginLoginButton.toUpperCase()),
+                      ),
+                    ),
+                    onPressed: state.status.isValidated
+                        ? () => context.bloc<LoginBloc>().add(FormSubmitted())
+                        : null,
                   ),
-                )),
-            onPressed: state.status.isValidated
-                ? () => context.bloc<LoginBloc>().add(FormSubmitted())
-                : null,
-          );
-        });
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   String generateError(LoginState state, BuildContext context) {
@@ -182,3 +243,115 @@ class LoginScreen extends StatelessWidget {
     return errorTranslated;
   }
 }
+
+// Column(
+// children: <Widget>[
+// Expanded(
+// flex: 2,
+// child: Container(
+// width: MediaQuery.of(context).size.width,
+// child: Image(
+// image: AssetImage(
+// 'assets/bg-atas.png',
+// ),
+// fit: BoxFit.fill,
+// ),
+// ),
+// ),
+// Expanded(
+// flex: 4,
+// child: Container(
+// child: Column(
+// children: <Widget>[
+// Expanded(
+// flex: 2,
+// child: Container(
+// child: Image(
+// image: AssetImage(
+// 'assets/logo-text.png',
+// )
+// ),
+// ),
+// ),
+// Expanded(
+// flex: 8,
+// child: Container(
+// child: Form(
+// //key: _formKey,
+// child: Padding(
+// padding: const EdgeInsets.only(left: 30, right: 30),
+// child: Column(
+// children: <Widget>[
+// Padding(
+// padding: const EdgeInsets.all(8.0),
+// child: Material(
+// elevation: 15.0,
+// shadowColor: Colors.black,
+// borderRadius: BorderRadius.circular(30.0),
+// child: new InputFieldArea(
+// controller: _usernameController,
+// enableValidation: false,
+// hint: "Username",
+// obscure: false,
+// icon: Icons.person,
+// suffixIcon: null,
+// ),
+// ),
+// ),
+// Padding(
+// padding: const EdgeInsets.only(
+// top: 10, left: 8.0, right: 8.0, bottom: 8.0),
+// child: Material(
+// elevation: 15.0,
+// shadowColor: Colors.black,
+// borderRadius: BorderRadius.circular(30.0),
+// child: new InputFieldArea(
+// controller: _passwordController,
+// enableValidation: false,
+// hint: "Password",
+// obscure: showPassword,
+// icon: Icons.lock_outline,
+// suffixIcon: IconButton(
+// icon: showPassword
+// ? (Icon(Icons.visibility_off, color: Colors.black26))
+// : (Icon(Icons.visibility, color: Colors.black26)),
+// onPressed: (){
+// setState(() {
+// showPassword = !showPassword;
+// });
+// },
+// ),
+// ),
+// ),
+// ),
+// Padding(
+// padding: const EdgeInsets.only(top: 30),
+// child: Material(
+// elevation: 10.0,
+// shadowColor: Colors.deepOrangeAccent,
+// borderRadius: BorderRadius.circular(30.0),
+// child: ButtonTheme(
+// shape: new RoundedRectangleBorder(
+// borderRadius:
+// new BorderRadius.circular(30.0)
+// ),
+// minWidth: MediaQuery.of(context).size.width / 2,
+// height: 50,
+// child: FlatButton(
+// padding: EdgeInsets.all(5),
+// color: Colors.deepOrangeAccent,
+// textColor: Colors.blue,
+// child: new Text('Login',
+// style: const TextStyle(
+// color: Colors.white,
+// fontSize: 16.0,
+// fontWeight: FontWeight.bold,
+// )
+// ),
+// onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
+// )
+// ),
+// ),
+// )
+// ],
+// ),
