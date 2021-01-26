@@ -40,7 +40,9 @@ class LoginScreen extends StatelessWidget {
               ),
               header(context),
               loginForm(),
-              Padding(padding: EdgeInsets.only(bottom: 30.0),),
+              Padding(
+                padding: EdgeInsets.only(bottom: 30.0),
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image(
@@ -89,14 +91,22 @@ class LoginScreen extends StatelessWidget {
                     },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.person_outline, size: 35.0,),
+                        border: InputBorder.none,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.person_outline,
+                            size: 35.0,
+                            color: Colors.black,
+                          ),
+                        ),
                         // border: UnderlineInputBorder(
                         //   borderSide: BorderSide(color: Colors.black),
                         // ),
                         labelText: S.of(context).pageLoginBar,
                         errorText: state.login.invalid
                             ? LoginValidationError.invalid.invalidMessage
-                            : null),
+                            : null,),
                   ),
                 ),
               ],
@@ -127,7 +137,13 @@ class LoginScreen extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.lock_outline, size: 35.0),
+                        border: InputBorder.none,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.lock_outline, size: 35.0,
+                            color: Colors.black,
+                          ),
+                        ),
                         // border: UnderlineInputBorder(
                         //   borderSide: BorderSide(color: Colors.black),
                         // ),
@@ -178,8 +194,9 @@ class LoginScreen extends StatelessWidget {
                 child: Text(
                   generateError(state, context),
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.bodyText1.fontSize,
-                      color: Theme.of(context).errorColor),
+                    fontSize: Theme.of(context).textTheme.bodyText1.fontSize,
+                    color: Theme.of(context).errorColor,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ));
@@ -195,8 +212,11 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Material(
               elevation: 10.0,
-              shadowColor: Colors.deepOrangeAccent,
-              borderRadius: BorderRadius.circular(30.0),
+              color: Colors.blue,
+              // shadowColor: Colors.deepOrangeAccent,
+              borderRadius: BorderRadius.circular(
+                30.0,
+              ),
               child: ButtonTheme(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
@@ -211,7 +231,12 @@ class LoginScreen extends StatelessWidget {
                         replacement: CircularProgressIndicator(value: null),
                         visible: !state.status.isSubmissionInProgress,
                         child: Text(
-                            S.of(context).pageLoginLoginButton.toUpperCase()),
+                          S.of(context).pageLoginLoginButton.toUpperCase(),
+                          style: TextStyle(
+                            fontSize:15.0,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                     onPressed: state.status.isValidated
