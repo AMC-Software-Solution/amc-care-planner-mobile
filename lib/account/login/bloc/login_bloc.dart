@@ -15,8 +15,10 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository _loginRepository;
 
-  LoginBloc({@required LoginRepository loginRepository}) : assert(loginRepository != null),
-        _loginRepository = loginRepository, super(const LoginState());
+  LoginBloc({@required LoginRepository loginRepository})
+      : assert(loginRepository != null),
+        _loginRepository = loginRepository,
+        super(const LoginState());
 
   @override
   void onTransition(Transition<LoginEvent, LoginState> transition) {
@@ -38,19 +40,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       yield state.copyWith(status: FormzStatus.submissionInProgress);
       UserJWT userJWT = UserJWT(state.login.value, state.password.value);
+      print(userJWT);
       try {
         var token = await _loginRepository.authenticate(userJWT);
         if (token.idToken != null) {
           FlutterSecureStorage storage = new FlutterSecureStorage();
           await storage.delete(key: HttpUtils.keyForJWTToken);
-          await storage.write(key: HttpUtils.keyForJWTToken, value: token.idToken);
+          await storage.write(
+              key: HttpUtils.keyForJWTToken, value: token.idToken);
           yield state.copyWith(status: FormzStatus.submissionSuccess);
         } else {
-          yield state.copyWith(status: FormzStatus.submissionFailure,
+          yield state.copyWith(
+              status: FormzStatus.submissionFailure,
               generalErrorKey: LoginState.authenticationFailKey);
         }
       } catch (e) {
-        yield state.copyWith(status: FormzStatus.submissionFailure,
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure,
             generalErrorKey: HttpUtils.errorServerKey);
       }
     }

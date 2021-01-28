@@ -26,33 +26,30 @@ class LoginScreen extends StatelessWidget {
         //   automaticallyImplyLeading: false,
         //   title: Text(S.of(context).pageLoginTitle),
         // ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image(
-                  image: AssetImage(
-                    'assets/images/bg-atas.png',
-                  ),
-                  fit: BoxFit.fill,
+        body: Column(
+          children: <Widget>[
+            Container(
+              child: Image(
+                image: AssetImage(
+                  'assets/images/bg-atas.png',
                 ),
               ),
-              header(context),
-              loginForm(),
-              Padding(padding: EdgeInsets.only(bottom: 30.0),),
-              Container(
-                width: MediaQuery.of(context).size.width,
+            ),
+            header(context),
+            loginForm(),
+            Expanded(
+              child: Container(
                 child: Image(
                   image: AssetImage(
                     'assets/images/bg-bawah.png',
                   ),
                   fit: BoxFit.fill,
+                  // width: MediaQuery.of(context).size.height * 0.4,
                 ),
               ),
-              // register(context)
-            ],
-          ),
+            ),
+            // register(context)
+          ],
         ),
       ),
     );
@@ -89,10 +86,12 @@ class LoginScreen extends StatelessWidget {
                     },
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.person_outline, size: 35.0,),
-                        // border: UnderlineInputBorder(
-                        //   borderSide: BorderSide(color: Colors.black),
-                        // ),
+                        prefixIcon: Icon(
+                          Icons.person_outline,
+                          size: 35.0,
+                          color: Colors.black,
+                        ),
+                        border: InputBorder.none,
                         labelText: S.of(context).pageLoginBar,
                         errorText: state.login.invalid
                             ? LoginValidationError.invalid.invalidMessage
@@ -106,6 +105,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget passwordField() {
+    bool passwordInvisible = true;
     return BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
@@ -127,10 +127,23 @@ class LoginScreen extends StatelessWidget {
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.lock_outline, size: 35.0),
-                        // border: UnderlineInputBorder(
-                        //   borderSide: BorderSide(color: Colors.black),
-                        // ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            passwordInvisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.black,
+                          ),
+                          onPressed: () {
+                            // code here
+                          },
+                        ),
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                          size: 35.0,
+                          color: Colors.black,
+                        ),
+                        border: InputBorder.none,
                         labelText: S.of(context).pageRegisterFormPassword,
                         errorText: state.password.invalid
                             ? PasswordValidationError.invalid.invalidMessage
@@ -243,115 +256,3 @@ class LoginScreen extends StatelessWidget {
     return errorTranslated;
   }
 }
-
-// Column(
-// children: <Widget>[
-// Expanded(
-// flex: 2,
-// child: Container(
-// width: MediaQuery.of(context).size.width,
-// child: Image(
-// image: AssetImage(
-// 'assets/bg-atas.png',
-// ),
-// fit: BoxFit.fill,
-// ),
-// ),
-// ),
-// Expanded(
-// flex: 4,
-// child: Container(
-// child: Column(
-// children: <Widget>[
-// Expanded(
-// flex: 2,
-// child: Container(
-// child: Image(
-// image: AssetImage(
-// 'assets/logo-text.png',
-// )
-// ),
-// ),
-// ),
-// Expanded(
-// flex: 8,
-// child: Container(
-// child: Form(
-// //key: _formKey,
-// child: Padding(
-// padding: const EdgeInsets.only(left: 30, right: 30),
-// child: Column(
-// children: <Widget>[
-// Padding(
-// padding: const EdgeInsets.all(8.0),
-// child: Material(
-// elevation: 15.0,
-// shadowColor: Colors.black,
-// borderRadius: BorderRadius.circular(30.0),
-// child: new InputFieldArea(
-// controller: _usernameController,
-// enableValidation: false,
-// hint: "Username",
-// obscure: false,
-// icon: Icons.person,
-// suffixIcon: null,
-// ),
-// ),
-// ),
-// Padding(
-// padding: const EdgeInsets.only(
-// top: 10, left: 8.0, right: 8.0, bottom: 8.0),
-// child: Material(
-// elevation: 15.0,
-// shadowColor: Colors.black,
-// borderRadius: BorderRadius.circular(30.0),
-// child: new InputFieldArea(
-// controller: _passwordController,
-// enableValidation: false,
-// hint: "Password",
-// obscure: showPassword,
-// icon: Icons.lock_outline,
-// suffixIcon: IconButton(
-// icon: showPassword
-// ? (Icon(Icons.visibility_off, color: Colors.black26))
-// : (Icon(Icons.visibility, color: Colors.black26)),
-// onPressed: (){
-// setState(() {
-// showPassword = !showPassword;
-// });
-// },
-// ),
-// ),
-// ),
-// ),
-// Padding(
-// padding: const EdgeInsets.only(top: 30),
-// child: Material(
-// elevation: 10.0,
-// shadowColor: Colors.deepOrangeAccent,
-// borderRadius: BorderRadius.circular(30.0),
-// child: ButtonTheme(
-// shape: new RoundedRectangleBorder(
-// borderRadius:
-// new BorderRadius.circular(30.0)
-// ),
-// minWidth: MediaQuery.of(context).size.width / 2,
-// height: 50,
-// child: FlatButton(
-// padding: EdgeInsets.all(5),
-// color: Colors.deepOrangeAccent,
-// textColor: Colors.blue,
-// child: new Text('Login',
-// style: const TextStyle(
-// color: Colors.white,
-// fontSize: 16.0,
-// fontWeight: FontWeight.bold,
-// )
-// ),
-// onPressed: state is! LoginLoading ? _onLoginButtonPressed : null,
-// )
-// ),
-// ),
-// )
-// ],
-// ),
