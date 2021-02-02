@@ -70,7 +70,10 @@ class AmcCarePlannerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AmcCarePlanner app',
-      theme: Themes.jhLight,
+     // theme: Themes.jhLight,
+       theme: ThemeData(
+            primarySwatch: Colors.blue
+        ),
       routes: {
         AmcCarePlannerRoutes.login: (context) {
           return BlocProvider<LoginBloc>(
