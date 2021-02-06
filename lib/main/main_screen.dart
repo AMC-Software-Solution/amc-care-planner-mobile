@@ -1,3 +1,4 @@
+import 'package:amcCarePlanner/shared/widgets/curved_navigation_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:amcCarePlanner/account/login/login_repository.dart';
@@ -8,7 +9,7 @@ import 'package:amcCarePlanner/shared/widgets/drawer/bloc/drawer_bloc.dart';
 import 'package:amcCarePlanner/shared/widgets/drawer/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key key}) : super(key: AmcCarePlannerKeys.mainScreen);
@@ -39,52 +40,7 @@ class MainScreen extends StatelessWidget {
             // ),
             // backgroundColor: Colors.white,
             body: body(context),
-            bottomNavigationBar: CurvedNavigationBar(
-              //key: _bottomNavigationKey,
-              index: 0,
-              height: 50.0,
-              items: <Widget>[
-                Icon(
-                  Icons.home,
-                  size: 25,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.notifications,
-                  size: 25,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.add,
-                  size: 25,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.person,
-                  size: 25,
-                  color: Colors.white,
-                ),
-                Icon(
-                  Icons.settings,
-                  size: 25,
-                  color: Colors.white,
-                ),
-              ],
-              color: Color.fromRGBO(114, 57, 241, 1),
-              buttonBackgroundColor: Colors.deepPurple,
-
-              // backgroundColor:Color.fromRGBO(114, 57, 241, 1),
-
-              backgroundColor: Colors.white,
-
-              animationCurve: Curves.easeInOut,
-              animationDuration: Duration(milliseconds: 600),
-              // onTap: (index) {
-              //   setState(() {
-              //     _currentIndex =index;
-              //   });
-              // },
-            ),
+            bottomNavigationBar: CurvedNavigation(),
             drawer: BlocProvider<DrawerBloc>(
                 create: (context) =>
                     DrawerBloc(loginRepository: LoginRepository()),

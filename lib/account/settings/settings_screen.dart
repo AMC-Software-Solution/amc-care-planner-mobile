@@ -1,3 +1,4 @@
+import 'package:amcCarePlanner/shared/widgets/curved_navigation_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:amcCarePlanner/account/login/login_repository.dart';
@@ -33,6 +34,7 @@ class SettingsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(children: <Widget>[settingsForm(context)]),
         ),
+        bottomNavigationBar: CurvedNavigation(),
         drawer: BlocProvider<DrawerBloc>(
             create: (context) => DrawerBloc(loginRepository: LoginRepository()),
             child: AmcCarePlannerDrawer())
