@@ -8,7 +8,8 @@ class LoginRepository {
   LoginRepository();
 
   Future<JWTToken> authenticate(UserJWT userJWT) async {
-    final authenticateRequest = await HttpUtils.postRequest<UserJWT>("/authenticate", userJWT);
+    final authenticateRequest =
+        await HttpUtils.postRequest<UserJWT>("/authenticate", userJWT);
     return JsonMapper.deserialize<JWTToken>(authenticateRequest.body);
   }
 

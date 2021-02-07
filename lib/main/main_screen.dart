@@ -289,7 +289,8 @@ class MainScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headline3)),
             ],
           );
-        });
+        }
+        );
   }
 
   Widget linkWidget(BuildContext context, String text, String url) {
@@ -315,3 +316,8 @@ class MainScreen extends StatelessWidget {
     }
   }
 }
+
+
+
+
+

@@ -34,6 +34,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
     if(currentUser.langKey.compareTo(S.current.locale) != 0) {
       S.load(Locale(currentUser.langKey));
+
     }
 
     yield state.copyWith(

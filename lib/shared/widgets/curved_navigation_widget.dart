@@ -38,6 +38,12 @@ class CurvedNavigation extends StatelessWidget {
           size: 25,
           color: Colors.white,
         ),
+        Icon(
+          Icons.more_horiz_outlined,
+          size: 30,
+          color: Colors.white,
+        ),
+
       ],
       color: Color.fromRGBO(114, 57, 241, 1),
       buttonBackgroundColor: Colors.deepPurple,

@@ -3,7 +3,6 @@ part of 'main_bloc.dart';
 
 class MainState extends Equatable {
   final User currentUser;
-
   const MainState({
     this.currentUser = const User('', '', '', '', '', ''),
   });
