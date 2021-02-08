@@ -4,8 +4,11 @@ import 'package:amcCarePlanner/account/login/login_repository.dart';
 import 'package:amcCarePlanner/account/register/bloc/register_bloc.dart';
 import 'package:amcCarePlanner/account/settings/settings_screen.dart';
 import 'package:amcCarePlanner/main/bloc/main_bloc.dart';
+import 'package:amcCarePlanner/more/bloc/more_bloc.dart';
+
 import 'package:amcCarePlanner/routes.dart';
 import 'package:amcCarePlanner/main/main_screen.dart';
+import 'package:amcCarePlanner/more/more_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:amcCarePlanner/shared/repository/account_repository.dart';
 import 'package:amcCarePlanner/themes.dart';
@@ -90,6 +93,13 @@ class AmcCarePlannerApp extends StatelessWidget {
             create: (context) => MainBloc(accountRepository: AccountRepository())
               ..add(Init()),
             child: MainScreen());
+        },
+        AmcCarePlannerRoutes.more_screen: (context) {
+          return BlocProvider<MoreBloc>(
+              create: (context) => MoreBloc(accountRepository: AccountRepository())
+                // ..add(Init())
+              ,
+              child: MoreScreen());
         },
       AmcCarePlannerRoutes.settings: (context) {
         return BlocProvider<SettingsBloc>(

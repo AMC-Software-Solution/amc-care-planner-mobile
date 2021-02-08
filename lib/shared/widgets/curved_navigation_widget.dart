@@ -33,11 +33,11 @@ class CurvedNavigation extends StatelessWidget {
           size: 25,
           color: Colors.white,
         ),
-        Icon(
-          Icons.settings,
-          size: 25,
-          color: Colors.white,
-        ),
+        // Icon(
+        //   Icons.settings,
+        //   size: 25,
+        //   color: Colors.white,
+        // ),
         Icon(
           Icons.more_horiz_outlined,
           size: 30,
@@ -51,10 +51,12 @@ class CurvedNavigation extends StatelessWidget {
       animationCurve: Curves.easeInOut,
       animationDuration: Duration(milliseconds: 600),
       onTap: (index) {
-        if (index == 4)
-          Navigator.pushNamed(context, AmcCarePlannerRoutes.settings);
         if (index == 0)
           Navigator.pushNamed(context, AmcCarePlannerRoutes.main);
+        if (index == 1)
+          Navigator.pushNamed(context, AmcCarePlannerRoutes.settings);
+        if (index == 4)
+          Navigator.pushNamed(context, AmcCarePlannerRoutes.more_screen);
       },
     );
   }
