@@ -29,6 +29,7 @@ dependencies:
   url_launcher: 5.7.2
   datetime_picker_formfield: 1.0.0
 
+
   #BLoC pattern related
   formz: 0.3.2
   equatable: 1.2.5

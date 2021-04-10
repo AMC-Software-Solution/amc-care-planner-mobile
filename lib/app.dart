@@ -72,7 +72,7 @@ class AmcCarePlannerApp extends StatelessWidget {
       title: 'AmcCarePlanner app',
      // theme: Themes.jhLight,
        theme: ThemeData(
-            primarySwatch: Colors.blue
+            primarySwatch: Colors.deepPurple
         ),
       routes: {
         AmcCarePlannerRoutes.login: (context) {
